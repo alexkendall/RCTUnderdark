@@ -55,15 +55,15 @@ Simply registering a reference to each listener will allow you to keep track of 
 
 ```
 componentDidMount() {
-    BluetoothCP.addPeerDetectedListener(callback)
-    BluetoothCP.addPeerLostListener(callback)
-    BluetoothCP.addReceivedMessageListener(callback)
-    BluetoothCP.addInviteListener(callback)
-    BluetoothCP.addConnectedListener(callback)
+  BluetoothCP.addPeerDetectedListener(callback)
+  BluetoothCP.addPeerLostListener(callback)
+  BluetoothCP.addReceivedMessageListener(callback)
+  BluetoothCP.addInviteListener(callback)
+  BluetoothCP.addConnectedListener(callback)
 }
 
 componentWillUnmount() {
-    BluetoothCP.removeListeners()
+  BluetoothCP.removeListeners()
 }
 ```
 
