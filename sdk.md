@@ -27,11 +27,11 @@ There are several listeners that can be added to monitor events concerning peers
 ##### Subscribing
 
 ```
-addPeerDetectedListener(callback)
-addPeerLostListener(callback)
-addReceivedMessageListener(callback)
-addInviteListener(callback)
-addConnectedListener(callback)
+BluetoothCP.addPeerDetectedListener(callback)
+BluetoothCP.addPeerLostListener(callback)
+BluetoothCP.addReceivedMessageListener(callback)
+BluetoothCP.addInviteListener(callback)
+BluetoothCP.addConnectedListener(callback)
 
 function callback(user) {
     // do stuff
@@ -55,19 +55,15 @@ Simply registering a reference to each listener will allow you to keep track of 
 
 ```
 componentDidMount() {
-    this.listener1 = addPeerDetectedListener(callback)
-    this.listener2 = addPeerLostListener(callback)
-    this.listener3 = addReceivedMessageListener(callback)
-    this.listener4 = addInviteListener(callback)
-    this.listener5 = addConnectedListener(callback)
+    BluetoothCP.addPeerDetectedListener(callback)
+    BluetoothCP.addPeerLostListener(callback)
+    BluetoothCP.addReceivedMessageListener(callback)
+    BluetoothCP.addInviteListener(callback)
+    BluetoothCP.addConnectedListener(callback)
 }
 
 componentWillUnmount() {
-    this.listener1.remove()
-    this.listener2.remove()
-    this.listener3.remove()
-    this.listener4.remove()
-    this.listener5.remove()
+    BluetoothCP.removeListeners()
 }
 ```
 
