@@ -44,6 +44,13 @@ class NetworkManager {
       callback(peers)
     })
   }
+  removeListeners() {
+    NativeEmitter.removeListener('detectedUser')
+    NativeEmitter.removeListener('lostUser')
+    NativeEmitter.removeListener('messageReceived')
+    NativeEmitter.removeListener('receivedInvitation')
+    NativeEmitter.removeListener('connectedToUser')
+  }
   /*listener callbacks
   peer contains .id (string), type(string), connected(bool), message(string), display name(string)
   */
