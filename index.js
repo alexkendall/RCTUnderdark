@@ -45,41 +45,41 @@ class NetworkManager {
     })
   }
   removeListeners() {
-    NativeEmitter.removeListener('detectedUser')
-    NativeEmitter.removeListener('lostUser')
-    NativeEmitter.removeListener('messageReceived')
-    NativeEmitter.removeListener('receivedInvitation')
-    NativeEmitter.removeListener('connectedToUser')
+    this.listener1.remove();
+    this.listener2.remove();
+    this.listener3.remove();
+    this.listener4.remove();
+    this.listener5.remove();
   }
   /*listener callbacks
   peer contains .id (string), type(string), connected(bool), message(string), display name(string)
   */
   addPeerDetectedListener(callback) {
-    return NativeEmitter.addListener(
+    this.listener1 = NativeEmitter.addListener(
     'detectedUser',
     (peer) =>  callback(peer)
     )
   }
-  addPeerLostListener(callback) {
-    return NativeEmitter.addListener(
+  addPeerLostListener(callback, listener2) {
+    this.listener2 = NativeEmitter.addListener(
     'lostUser',
     (peer) => callback(peer)
     )
   }
-  addReceivedMessageListener(callback) {
-    return NativeEmitter.addListener(
+  addReceivedMessageListener(callback, listener3) {
+    this.listener3 = NativeEmitter.addListener(
       'messageReceived',
       (peer) => callback(peer)
     );
   }
-  addInviteListener(callback) {
-    return NativeEmitter.addListener(
+  addInviteListener(callback, listener4) {
+    this.listener4 = NativeEmitter.addListener(
       'receivedInvitation',
       (peer) => callback(peer)
     )
   }
-  addConnectedListener(callback) {
-    return NativeEmitter.addListener(
+  addConnectedListener(callback, listener5) {
+    this.listener5 = NativeEmitter.addListener(
       'connectedToUser',
       (peer) => callback(peer)
     )
