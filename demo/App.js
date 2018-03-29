@@ -49,7 +49,7 @@ export default class App extends Component<Props> {
             console.log('addConnectedListener', peer)
 
             BluetoothCP.sendMessage("TEST MESSAGE", peer.id)
-
+            peer.key = peer.id;
             this.setState(prevState => ({
               connectedUsers: [...prevState.connectedUsers, peer]
             }))
@@ -83,11 +83,12 @@ export default class App extends Component<Props> {
                 onPress={this.advertise}
                 title={"Connect to Device"}
             />
-
             <FlatList
               data={this.state.connectedUsers}
               renderItem={({item}) => <Text>{item.name}</Text>}
             />
+
+
           </View>
         );
   }
