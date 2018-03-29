@@ -25,8 +25,9 @@ type Props = {};
 export default class App extends Component<Props> {
 
     componentDidMount() {
-        this.listener1 = BluetoothCP.addPeerDetectedListener((peers) => {
-            console.log('addPeerDetectedListener', peers)
+        this.listener1 = BluetoothCP.addPeerDetectedListener((peer) => {
+            BluetoothCP.inviteUser(peer.id)
+            console.log('addPeerDetectedListener', peer)
         });
         this.listener2 = BluetoothCP.addPeerLostListener((peers) => {
             console.log('addPeerLostListener', peers)
@@ -34,11 +35,13 @@ export default class App extends Component<Props> {
         this.listener3 = BluetoothCP.addReceivedMessageListener((peers) => {
             console.log('addReceivedMessageListener', peers)
         });
-        this.listener4 = BluetoothCP.addInviteListener((peers) => {
-            console.log('addInviteListener', peers)
+        this.listener4 = BluetoothCP.addInviteListener((peer) => {
+            BluetoothCP.acceptInvitation(peer.id)
+            console.log('addInviteListener', peer)
         });
-        this.listener5 = BluetoothCP.addConnectedListener((peers) => {
-            console.log('addConnectedListener', peers)
+        this.listener5 = BluetoothCP.addConnectedListener((peer) => {
+            console.log('addConnectedListener', peer)
+            BluetoothCP.sendMessage("TEST MESSAGE", peer.id)
         });
         this.listener6 = BluetoothCP.getNearbyPeers((peers) => {
             console.log('getNearbyPeers', peers)
@@ -47,7 +50,7 @@ export default class App extends Component<Props> {
             console.log('getConnectedPeers', peers)
         });
         console.log('mounted')
-
+        BluetoothCP.advertise('WIFI');
     }
 
     callback(user) {
