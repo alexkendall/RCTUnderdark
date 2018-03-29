@@ -25,18 +25,38 @@ type Props = {};
 export default class App extends Component<Props> {
 
     componentDidMount() {
-        this.listener1 = BluetoothCP.addPeerDetectedListener(this.callback)
-        this.listener2 = BluetoothCP.addPeerLostListener(this.callback)
-        this.listener3 = BluetoothCP.addReceivedMessageListener(this.callback)
-        this.listener4 = BluetoothCP.addInviteListener(this.callback)
-        this.listener5 = BluetoothCP.addConnectedListener(this.callback)
-        this.listener6 = BluetoothCP.getNearbyPeers(this.callback)
-        this.listener7 = BluetoothCP.getConnectedPeers(this.callback)
+        this.listener1 = BluetoothCP.addPeerDetectedListener((peers) => {
+            console.log('addPeerDetectedListener', peers)
+        });
+        this.listener2 = BluetoothCP.addPeerLostListener((peers) => {
+            console.log('addPeerLostListener', peers)
+        });
+        this.listener3 = BluetoothCP.addReceivedMessageListener((peers) => {
+            console.log('addReceivedMessageListener', peers)
+        });
+        this.listener4 = BluetoothCP.addInviteListener((peers) => {
+            console.log('addInviteListener', peers)
+        });
+        this.listener5 = BluetoothCP.addConnectedListener((peers) => {
+            console.log('addConnectedListener', peers)
+        });
+        this.listener6 = BluetoothCP.getNearbyPeers((peers) => {
+            console.log('getNearbyPeers', peers)
+        });
+        this.listener7 = BluetoothCP.getConnectedPeers((peers) => {
+            console.log('getConnectedPeers', peers)
+        });
         console.log('mounted')
+
     }
 
     callback(user) {
         console.log(user)
+    }
+
+    advertise(){
+        console.log('advertising');
+        BluetoothCP.advertise('WIFI');
     }
 
   render() {
@@ -47,7 +67,7 @@ export default class App extends Component<Props> {
         </Text>
 
         <Button
-         onPress={() => { BluetoothCP.advertise('WIFI-BT'); }}
+         onPress={this.advertise}
          title={"Connect to Device"}
        />
       </View>
