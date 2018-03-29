@@ -11,6 +11,7 @@ import {
   Text,
   View,
   Button,
+  FlatList,
 } from 'react-native';
 let BluetoothCP = require("react-native-bluetooth-cross-platform")
 
@@ -23,33 +24,44 @@ const instructions = Platform.select({
 
 type Props = {};
 export default class App extends Component<Props> {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            connectedUsers: []
+        };
+    }
     componentDidMount() {
-        this.listener1 = BluetoothCP.addPeerDetectedListener((peer) => {
+        BluetoothCP.addPeerDetectedListener((peer) => {
             BluetoothCP.inviteUser(peer.id)
             console.log('addPeerDetectedListener', peer)
         });
-        this.listener2 = BluetoothCP.addPeerLostListener((peers) => {
+        BluetoothCP.addPeerLostListener((peers) => {
             console.log('addPeerLostListener', peers)
         });
-        this.listener3 = BluetoothCP.addReceivedMessageListener((peers) => {
+        BluetoothCP.addReceivedMessageListener((peers) => {
             console.log('addReceivedMessageListener', peers)
         });
-        this.listener4 = BluetoothCP.addInviteListener((peer) => {
+        BluetoothCP.addInviteListener((peer) => {
             BluetoothCP.acceptInvitation(peer.id)
             console.log('addInviteListener', peer)
         });
-        this.listener5 = BluetoothCP.addConnectedListener((peer) => {
+        BluetoothCP.addConnectedListener((peer) => {
             console.log('addConnectedListener', peer)
+
             BluetoothCP.sendMessage("TEST MESSAGE", peer.id)
+
+            this.setState(prevState => ({
+              connectedUsers: [...prevState.connectedUsers, peer]
+            }))
         });
-        this.listener6 = BluetoothCP.getNearbyPeers((peers) => {
+        BluetoothCP.getNearbyPeers((peers) => {
             console.log('getNearbyPeers', peers)
         });
-        this.listener7 = BluetoothCP.getConnectedPeers((peers) => {
+        BluetoothCP.getConnectedPeers((peers) => {
             console.log('getConnectedPeers', peers)
         });
-        console.log('mounted')
+
+
         BluetoothCP.advertise('WIFI');
     }
 
@@ -58,23 +70,26 @@ export default class App extends Component<Props> {
     }
 
     advertise(){
-        console.log('advertising');
-        BluetoothCP.advertise('WIFI');
+
     }
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
+    render() {
+        return (
+          <View style={styles.container}>
+            <Text style={styles.welcome}>
+              Welcome to React Native!
+            </Text>
+            <Button
+                onPress={this.advertise}
+                title={"Connect to Device"}
+            />
 
-        <Button
-         onPress={this.advertise}
-         title={"Connect to Device"}
-       />
-      </View>
-    );
+            <FlatList
+              data={this.state.connectedUsers}
+              renderItem={({item}) => <Text>{item.name}</Text>}
+            />
+          </View>
+        );
   }
 }
 
