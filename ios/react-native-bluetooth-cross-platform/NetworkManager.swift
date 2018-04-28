@@ -86,8 +86,5 @@ public class NetworkManager: NetworkCommunicator, ReactNearby {
   @objc public  func sendMessage(_ message: String, userId:String) {
     self.sendMessage(message: message, userId: userId)
   }
-  
-  override public func supportedEvents() -> [String]! {
-    return ["lostUser","detectedUser", "messageReceived", "connectedToUser", "receivedInvitation"]
-  }
+
 }

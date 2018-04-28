@@ -1,11 +1,16 @@
 import {
   NativeModules,
   NativeEventEmitter,
+  Platform,
 } from 'react-native'
 import React from 'react'
 
 var NativeManager = NativeModules.NetworkManager
-var NativeEmitter =  new NativeEventEmitter(NativeModules.NetworkManager)
+
+var NativeEmitter = new NativeEventEmitter(Platform.select({
+  ios: NativeModules.NetworkManagerEventEmitter,
+  android: NativeModules.NetworkManager,
+}))
 
 class NetworkManager {
   // kind can be one of "WIFI", "BT", and "WIFI-BT"
