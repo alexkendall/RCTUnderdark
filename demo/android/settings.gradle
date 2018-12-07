@@ -1,0 +1,5 @@
+rootProject.name = 'Mesh'
+
+include ':app'
+include ':react-native-bluetooth-cross-platform'
+project(':react-native-bluetooth-cross-platform').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-bluetooth-cross-platform/android')
