@@ -189,9 +189,11 @@ public class NetworkCommunicator: TransportHandler, MessageEncoder, MessageDecod
 
       for i in 0..<nearbyUserCount {
         if nearbyUsers[i].deviceId == user.deviceId && nearbyUsers[i].mode != user.mode {
+          self.sendEvent(withName: "redetectedUser", body: user.getJSUser("redetected user"))
           nearbyUsers[i].mode = user.mode;
           return;
         } else if nearbyUsers[i].deviceId == user.deviceId {
+          self.sendEvent(withName: "redetectedUser", body: user.getJSUser("redetected user"))
           return;
         }
       }
@@ -203,6 +205,6 @@ public class NetworkCommunicator: TransportHandler, MessageEncoder, MessageDecod
   }
   
   override open func supportedEvents() -> [String]! {
-    return ["lostUser","detectedUser", "messageReceived", "connectedToUser", "receivedInvitation"]
+    return ["lostUser", "detectedUser", "redetectedUser", "messageReceived", "connectedToUser", "receivedInvitation"]
   }
 }
