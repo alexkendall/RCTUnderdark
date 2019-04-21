@@ -241,6 +241,7 @@ public class NetworkCommunicator extends TransportHandler implements MessageDeco
 
     // UTILITY
     public User findUser(String id) {
+        if (id == null) return null;
         for (int i = 0; i < nearbyUsers.size(); ++i) {
             if (nearbyUsers.elementAt(i).deviceId.contains(id)) {
                 return nearbyUsers.elementAt(i);
