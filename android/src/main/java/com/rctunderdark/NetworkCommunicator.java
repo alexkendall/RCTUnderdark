@@ -250,6 +250,8 @@ public class NetworkCommunicator extends TransportHandler implements MessageDeco
     }
     private void checkForNewUser(User user) {
         if(findUser(user.deviceId) != null) {
+            context.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                .emit("redetectedUser", user.getJSUser());
             return;
         }
         nearbyUsers.add(user);
