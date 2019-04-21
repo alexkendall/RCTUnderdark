@@ -53,6 +53,12 @@ class NetworkManager {
     (peer) =>  callback(peer)
     )
   }
+  addPeerRedetectedListener(callback) {
+    return NativeEmitter.addListener(
+    'redetectedUser',
+    (peer) =>  callback(peer)
+    )
+  }
   addPeerLostListener(callback) {
     return NativeEmitter.addListener(
     'lostUser',
