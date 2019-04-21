@@ -28,6 +28,7 @@ There are several listeners that can be added to monitor events concerning peers
 
 ```
 addPeerDetectedListener(callback)
+addPeerRedetectedListener(callback)
 addPeerLostListener(callback)
 addReceivedMessageListener(callback)
 addInviteListener(callback)
@@ -57,9 +58,10 @@ Simply registering a reference to each listener will allow you to keep track of 
 componentDidMount() {
     this.listener1 = addPeerDetectedListener(callback)
     this.listener2 = addPeerLostListener(callback)
-    this.listener3 = addReceivedMessageListener(callback)
-    this.listener4 = addInviteListener(callback)
-    this.listener5 = addConnectedListener(callback)
+    this.listener3 = addPeerRedetectedListener(callback)
+    this.listener4 = addReceivedMessageListener(callback)
+    this.listener5 = addInviteListener(callback)
+    this.listener6 = addConnectedListener(callback)
 }
 
 componentWillUnmount() {
@@ -68,6 +70,7 @@ componentWillUnmount() {
     this.listener3.remove()
     this.listener4.remove()
     this.listener5.remove()
+    this.listener6.remove()
 }
 ```
 
