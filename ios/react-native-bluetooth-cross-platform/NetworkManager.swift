@@ -88,6 +88,6 @@ public class NetworkManager: NetworkCommunicator, ReactNearby {
   }
   
   override public func supportedEvents() -> [String]! {
-    return ["lostUser","detectedUser", "messageReceived", "connectedToUser", "receivedInvitation"]
+    return ["lostUser", "detectedUser", "redetectedUser", "messageReceived", "connectedToUser", "receivedInvitation"]
   }
 }
