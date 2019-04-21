@@ -24,7 +24,7 @@ public class NetworkCommunicator: TransportHandler, MessageEncoder, MessageDecod
     DispatchQueue.main.async(execute: {
       if self.advertiseTimer == nil {
         self.advertiseTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.broadcastType), userInfo: nil, repeats: true)
-        RunLoop.main.add(self.advertiseTimer!, forMode: RunLoopMode.defaultRunLoopMode)
+        RunLoop.main.add(self.advertiseTimer!, forMode: RunLoop.Mode.default)
       }
     })
   }
