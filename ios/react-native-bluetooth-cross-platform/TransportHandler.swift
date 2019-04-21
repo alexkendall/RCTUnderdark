@@ -89,7 +89,7 @@ open class TransportHandler: RCTEventEmitter, UDTransportDelegate {
   }
   
   override open func supportedEvents() -> [String]! {
-    return ["lostUser","detectedUser", "messageReceived", "connectedToUser", "receivedInvitation"]
+    return ["lostUser", "detectedUser", "redetectedUser", "messageReceived", "connectedToUser", "receivedInvitation"]
   }
   
 }
