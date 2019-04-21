@@ -126,7 +126,7 @@ public class NetworkCommunicator: TransportHandler, MessageEncoder, MessageDecod
     sendMessage(message: "invitation", link: user.link)
   }
 
-  open func broadcastType() {
+  @objc open func broadcastType() {
     for i in 0..<links.count {
       sendMessage(message: self.type.rawValue, link: links[i])
     }
